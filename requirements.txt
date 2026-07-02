@@ -1,0 +1,19 @@
+# UI & Server Framework
+chainlit>=1.0.0
+
+# AI & Orchestration
+langchain-google-genai
+langchain-core
+langchain-openai
+pydantic
+
+# Memory & Vector Database
+chromadb
+
+# Audio & Vision Senses
+SpeechRecognition
+pyaudio
+opencv-python
+
+# Environment Management
+python-dotenv
