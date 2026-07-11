@@ -17,3 +17,6 @@ The provided matrix handles operational logic and execution pathways.
 ## Implementation
 ```python
 {code_snippet[:200]} # Truncated for preview
+""" file_path = os.path.join(target_dir, f"{module_name}_docs.md") with open(file_path, "w", encoding="utf-8") as f: f.write(doc_template)
+
+return f"📄 **Technical Docs Compiled:** Saved Markdown spec to `{file_path}`"
