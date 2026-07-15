@@ -8,8 +8,9 @@ def assign_task(task_name: str, assignee: str, priority: str = "High", brand: st
     os.makedirs(target_dir, exist_ok=True)
     board_path = os.path.join(target_dir, "kanban_board.json")
     
-    # Defaulting to the core 3-person matrix
-    valid_team = ["Advait", "Lokesh", "Teammate_3"]
+    # Updated Core Roster
+    valid_team = ["Advait", "Tarun", "Nicky", "Shubhansh"]
+    
     if assignee not in valid_team:
         return f"⚠️ Assignment Error: '{assignee}' is not recognized in the core roster."
         
