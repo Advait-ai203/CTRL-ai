@@ -11,13 +11,62 @@ from tools.team_agents.task_delegator import assign_task
 # 1. Configure the Web Page
 st.set_page_config(page_title="CTRL-ai Matrix", page_icon="⚡", layout="wide")
 
+# --- UI UPGRADE: Inject Custom CSS Styling ---
+st.markdown("""
+    <style>
+    /* Dark Cyberpunk Theme Overrides */
+    .stApp {
+        background-color: #0a0a0a;
+        color: #ffffff;
+    }
+    /* Style the Sidebar with Glassmorphism */
+    [data-testid="stSidebar"] {
+        background: rgba(20, 20, 20, 0.8) !important;
+        backdrop-filter: blur(10px);
+        border-right: 1px solid #00FF88;
+    }
+    /* Custom Neon Buttons */
+    .stButton>button {
+        background-color: transparent;
+        color: #00FF88;
+        border: 1px solid #00FF88;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+    .stButton>button:hover {
+        background-color: #00FF88;
+        color: #000000;
+        border: 1px solid #00FF88;
+        box-shadow: 0 0 10px #00FF88;
+    }
+    /* Headers and Text */
+    h1, h2, h3 {
+        color: #ffffff !important;
+        font-family: 'Courier New', monospace;
+    }
+    /* Style the Input Boxes */
+    .stTextInput>div>div>input, .stSelectbox>div>div>div {
+        background-color: #1a1a1a !important;
+        color: #00FF88 !important;
+        border: 1px solid #333 !important;
+    }
+    </style>
+""", unsafe_allow_html=True)
+# ---------------------------------------------
+
 # 2. Build the UI Header
 st.title("⚡ CTRL-ai Master Matrix")
 st.markdown("Welcome to the autonomous intelligence framework for **ctrl** and **allmate**.")
 st.divider()
 
 # 3. Create a Sidebar Menu
-st.sidebar.header("Command Modules")
+st.sidebar.header("Matrix Navigation")
+
+# Added: The missing Global Search Bar
+search_query = st.sidebar.text_input("🔍 Search Matrix...", placeholder="e.g., pitch decks, active tasks")
+
+st.sidebar.divider()
+
 module = st.sidebar.radio(
     "Select Department:",
     ("Startup Founder", "Marketing", "Hardware Engineering", "Team Operations")
@@ -36,8 +85,8 @@ if module == "Startup Founder":
 
 elif module == "Marketing":
     st.subheader("Ad Copy Generator")
-    prod_name = st.text_input("Product Name (e.g., Heavyweight Hoodie)")
-    val_prop = st.text_input("Core Value Proposition")
+    prod_name = st.text_input("Product Name", placeholder="e.g., Heavyweight Hoodie")
+    val_prop = st.text_input("Core Value Proposition", placeholder="e.g., Waterproof everyday carry")
     if st.button("Generate Copy") and prod_name and val_prop:
         result = generate_ad_copy(product_name=prod_name, value_prop=val_prop)
         st.info(result)
