@@ -1,39 +1,36 @@
-// script.js - Advanced Matrix Logic
 const terminal = document.getElementById('log-output');
 
 function log(text, isAi = true) {
     const p = document.createElement('p');
-    p.innerHTML = isAi ? `<span class="ai-text">> [MATRIX]: ${text}</span>` : `> [USER]: ${text}`;
+    p.className = isAi ? 'ai-text' : 'user-text';
+    p.innerText = isAi ? `> [MATRIX]: ${text}` : `> [USER]: ${text}`;
     terminal.appendChild(p);
     terminal.scrollTop = terminal.scrollHeight;
 }
 
-// Simple AI Brain Simulation
-function processCommand(input) {
-    log(input, false);
-    
-    // Simulate "thinking"
-    setTimeout(() => {
-        let response = "";
-        const cmd = input.toLowerCase();
-
-        if (cmd.includes("pitch")) {
-            response = "Compiling board narrative for 'ctrl'... [SUCCESS] Strategy: Growth-First. Vision: Scalable SaaS.";
-        } else if (cmd.includes("battery")) {
-            response = "Calculating runtime... [NOMINAL] Based on current load, estimated uptime is 14.2 hours.";
-        } else if (cmd.includes("assign")) {
-            response = "Routing task to team node... [ACKNOWLEDGED] Task updated in the Kanban registry.";
-        } else {
-            response = "Command not recognized. Current nodes: [PITCH, BATTERY, ASSIGN].";
-        }
-        log(response);
-    }, 800);
+function saveKey() {
+    localStorage.setItem('GEMINI_KEY', document.getElementById('api-key-input').value);
+    log("API Key stored in local browser session.");
 }
 
-// Add event listener to your command input
-document.getElementById('command-input').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        processCommand(this.value);
-        this.value = '';
+async function processCommand(input) {
+    const apiKey = localStorage.getItem('GEMINI_KEY');
+    if (!apiKey) { log("Error: API Key not set."); return; }
+    log(input, false);
+
+    try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ contents: [{parts: [{text: input}]}] })
+        });
+        const data = await response.json();
+        log(data.candidates[0].content.parts[0].text);
+    } catch (e) {
+        log("Connection error. Check API Key validity.");
     }
+}
+
+document.getElementById('command-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') { processCommand(e.target.value); e.target.value = ''; }
 });
