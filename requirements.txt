@@ -17,3 +17,5 @@ opencv-python
 
 # Environment Management
 python-dotenv
+#streaming it
+streamlit
