@@ -2,82 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CTRL-ai // Master Matrix</title>
+    <title>CTRL-ai // Command Hub</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <header class="matrix-header">
-        <div class="logo">⚡ CTRL-ai // MATRIX</div>
-        <div class="system-status">STATUS: <span class="blink">ONLINE</span></div>
-    </header>
-
-    <div class="matrix-container">
-        
-        <nav class="sidebar">
-            <h3>DEPARTMENTS</h3>
-            <button class="nav-btn active" onclick="switchTab('founder')">Startup Founder</button>
-            <button class="nav-btn" onclick="switchTab('hardware')">Advanced Hardware</button>
-            <button class="nav-btn" onclick="switchTab('marketing')">Marketing Matrix</button>
-            <button class="nav-btn" onclick="switchTab('team')">Team Operations</button>
-        </nav>
-
-        <main class="viewport">
-            
-            <div id="founder" class="tab-content active">
-                <h2>📈 Investor Pitch Compiler</h2>
-                <p>Generate high-level board narratives for your venture studio brands.</p>
-                <div class="control-group">
-                    <select id="brand-select">
-                        <option value="ctrl">ctrl (Software Studio)</option>
-                        <option value="allmate">allmate (Physical Goods)</option>
-                    </select>
-                    <button class="action-btn" onclick="runFounderPitch()">Compile Pitch</button>
-                </div>
-                <div id="founder-output" class="terminal-box">Waiting for execution command...</div>
-            </div>
-
-            <div id="hardware" class="tab-content">
-                <h2>⚡ Power Draw & Battery Estimator</h2>
-                <p>Calculate operational runtimes for custom hardware prototypes.</p>
-                <div class="control-group">
-                    <label>Battery Capacity (mAh): <input type="number" id="mah-input" value="3000"></label>
-                    <label>System Draw (mA): <input type="number" id="draw-input" value="150"></label>
-                    <button class="action-btn" onclick="runHardwareEstimate()">Calculate Runtime</button>
-                </div>
-                <div id="hardware-output" class="terminal-box">Awaiting hardware metrics...</div>
-            </div>
-
-            <div id="marketing" class="tab-content">
-                <h2>📢 Ad Copy Generator</h2>
-                <p>Deploy targeted marketing hooks for product launches.</p>
-                <div class="control-group">
-                    <input type="text" id="prod-input" placeholder="Product Name (e.g., Heavyweight Hoodie)">
-                    <button class="action-btn" onclick="runAdGen()">Generate Hook</button>
-                </div>
-                <div id="marketing-output" class="terminal-box">Awaiting product inputs...</div>
-            </div>
-
-            <div id="team" class="tab-content">
-                <h2>👥 Team Task Delegator</h2>
-                <p>Route sprint tickets across the core roster.</p>
-                <div class="control-group">
-                    <input type="text" id="task-input" placeholder="Task description...">
-                    <select id="assignee-select">
-                        <option value="Advait">Advait</option>
-                        <option value="Tarun">Tarun</option>
-                        <option value="Nicky">Nicky</option>
-                        <option value="Shubhansh">Shubhansh</option>
-                    </select>
-                    <button class="action-btn" onclick="runTaskDelegation()">Delegate Node</button>
-                </div>
-                <div id="team-output" class="terminal-box">Kanban board standing by...</div>
-            </div>
-
-        </main>
+    <div id="settings">
+        <input type="password" id="api-key-input" placeholder="Enter API Key...">
+        <button onclick="saveKey()">Set Key</button>
     </div>
-
+    <div id="terminal">
+        <div id="log-output">> System Initialized... Ready.</div>
+    </div>
+    <input type="text" id="command-input" placeholder="> Enter command (e.g., 'Pitch ctrl')..." autofocus>
     <script src="script.js"></script>
 </body>
 </html>
